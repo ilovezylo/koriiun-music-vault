@@ -6,15 +6,14 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useSession } from "@/hooks/use-admin";
-import bow from "@/assets/deco-bow.png";
 
 export const Route = createFileRoute("/auth")({
   head: () => ({
     meta: [
-      { title: "Admin sign in — koriiun vault" },
-      { name: "description", content: "Private sign in for the koriiun music vault admin." },
-      { property: "og:title", content: "Admin sign in — koriiun vault" },
-      { property: "og:description", content: "Private sign in for the koriiun music vault admin." },
+      { title: "Admin sign in — kami’s vault" },
+      { name: "description", content: "Private sign in for the kamisfemboys.help music vault admin." },
+      { property: "og:title", content: "Admin sign in — kami’s vault" },
+      { property: "og:description", content: "Private sign in for the kamisfemboys.help music vault admin." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "robots", content: "noindex" },
@@ -61,7 +60,6 @@ function AuthPage() {
   return (
     <main className="flex min-h-screen items-center justify-center px-5 py-12">
       <div className="card-cute w-full max-w-sm p-6">
-        <img src={bow} alt="" width={512} height={512} loading="lazy" className="mx-auto w-20" />
         <h1 className="mt-2 text-center font-display text-2xl font-extrabold">admin only ♡</h1>
         <p className="mt-1 text-center text-sm text-muted-foreground">
           this is just for uploading songs. listeners don't need an account.

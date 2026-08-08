@@ -37,7 +37,7 @@ function AdminPage() {
   const { data: songs = [] } = useQuery({ queryKey: ["songs"], queryFn: fetchSongs });
 
   const [title, setTitle] = useState("");
-  const [artist, setArtist] = useState("koriiun");
+  const [artist, setArtist] = useState("kami");
   const [audio, setAudio] = useState<File | null>(null);
   const [cover, setCover] = useState<File | null>(null);
   const [busy, setBusy] = useState(false);
@@ -75,7 +75,7 @@ function AdminPage() {
 
       const { error } = await supabase.from("songs").insert({
         title: title.trim() || audio.name.replace(/\.[^.]+$/, ""),
-        artist: artist.trim() || "koriiun",
+        artist: artist.trim() || "kami",
         audio_path: audioPath,
         cover_path: coverPath,
       });
