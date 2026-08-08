@@ -83,6 +83,12 @@ function Vault() {
         loading="lazy"
         className="pointer-events-none absolute bottom-40 right-8 z-10 w-16 animate-float opacity-70 sm:w-24"
       />
+      <img
+        src={deco4.url}
+        alt=""
+        loading="lazy"
+        className="pointer-events-none absolute left-1/2 top-[64%] z-10 w-14 animate-float opacity-70 sm:w-20"
+      />
       <div className="flex min-h-screen">
         <aside className="hidden w-60 shrink-0 flex-col gap-1 border-r border-sidebar-border bg-sidebar p-4 md:flex">
           <div className="mb-6 flex items-center gap-2 px-2">
