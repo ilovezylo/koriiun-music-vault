@@ -9,15 +9,14 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { fetchSongs } from "@/lib/vault";
 import { useIsAdmin, useSession } from "@/hooks/use-admin";
-import tape from "@/assets/deco-tape.png";
 
 export const Route = createFileRoute("/_authenticated/admin")({
   head: () => ({
     meta: [
-      { title: "Upload songs — koriiun vault admin" },
-      { name: "description", content: "Private admin area for uploading songs to the koriiun music vault." },
-      { property: "og:title", content: "Upload songs — koriiun vault admin" },
-      { property: "og:description", content: "Private admin area for the koriiun music vault." },
+      { title: "Upload songs — kami’s vault admin" },
+      { name: "description", content: "Private admin area for uploading songs to the kamisfemboys.help music vault." },
+      { property: "og:title", content: "Upload songs — kami’s vault admin" },
+      { property: "og:description", content: "Private admin area for the kamisfemboys.help music vault." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "robots", content: "noindex" },
@@ -38,7 +37,7 @@ function AdminPage() {
   const { data: songs = [] } = useQuery({ queryKey: ["songs"], queryFn: fetchSongs });
 
   const [title, setTitle] = useState("");
-  const [artist, setArtist] = useState("koriiun");
+  const [artist, setArtist] = useState("kami");
   const [audio, setAudio] = useState<File | null>(null);
   const [cover, setCover] = useState<File | null>(null);
   const [busy, setBusy] = useState(false);
@@ -76,7 +75,7 @@ function AdminPage() {
 
       const { error } = await supabase.from("songs").insert({
         title: title.trim() || audio.name.replace(/\.[^.]+$/, ""),
-        artist: artist.trim() || "koriiun",
+        artist: artist.trim() || "kami",
         audio_path: audioPath,
         cover_path: coverPath,
       });
@@ -174,12 +173,14 @@ function AdminPage() {
           {songs.map((song) => (
             <li key={song.id} className="card-cute flex items-center gap-3 p-3">
               <div className="size-12 shrink-0 overflow-hidden rounded-xl border-2 border-border bg-muted">
-                <img
-                  src={song.coverUrl ?? tape}
-                  alt={`${song.title} cover`}
-                  loading="lazy"
-                  className="h-full w-full object-cover"
-                />
+                {song.coverUrl ? (
+                  <img
+                    src={song.coverUrl}
+                    alt={`${song.title} cover`}
+                    loading="lazy"
+                    className="h-full w-full object-cover"
+                  />
+                ) : null}
               </div>
               <div className="min-w-0 flex-1">
                 <p className="truncate font-semibold">{song.title}</p>

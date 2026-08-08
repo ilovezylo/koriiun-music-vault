@@ -1,9 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import { Pause, Play, Repeat, Shuffle, SkipBack, SkipForward, Volume2, VolumeX } from "lucide-react";
+import { Music4, Pause, Play, Repeat, Shuffle, SkipBack, SkipForward, Volume2, VolumeX } from "lucide-react";
 import { Slider } from "@/components/ui/slider";
 import { Button } from "@/components/ui/button";
 import { formatTime, type Song } from "@/lib/vault";
-import tape from "@/assets/deco-tape.png";
 
 type Props = {
   songs: Song[];
@@ -63,10 +62,10 @@ export function MusicPlayer({ songs, index, onIndexChange, playing, onPlayingCha
   if (!song) return null;
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-40 px-3 pb-3">
-      <div className="card-cute mx-auto flex max-w-4xl flex-col gap-3 p-3 sm:p-4">
-        <div className="flex items-center gap-3">
-          <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-2xl border-2 border-border bg-muted">
+    <div className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-sidebar/95 backdrop-blur">
+      <div className="flex items-center gap-4 px-4 py-3">
+        <div className="flex min-w-0 items-center gap-3 sm:w-64">
+          <div className="size-12 shrink-0 overflow-hidden rounded-md border border-border bg-muted">
             {song.coverUrl ? (
               <img
                 src={song.coverUrl}
@@ -75,15 +74,18 @@ export function MusicPlayer({ songs, index, onIndexChange, playing, onPlayingCha
                 className="h-full w-full object-cover"
               />
             ) : (
-              <img src={tape} alt="" width={512} height={512} loading="lazy" className="h-full w-full object-contain p-1" />
+              <div className="grid h-full w-full place-items-center">
+                <Music4 className="size-5 text-muted-foreground" />
+              </div>
             )}
           </div>
-
-          <div className="min-w-0 flex-1">
-            <p className="truncate font-display text-base font-bold leading-tight">{song.title}</p>
+          <div className="min-w-0">
+            <p className="truncate text-sm font-bold leading-tight">{song.title}</p>
             <p className="truncate text-xs text-muted-foreground">{song.artist}</p>
           </div>
+        </div>
 
+        <div className="flex min-w-0 flex-1 flex-col items-center gap-1">
           <div className="flex items-center gap-1">
             <Button variant="ghost" size="icon" aria-label="Shuffle" onClick={() => setShuffle((v) => !v)}>
               <Shuffle className={shuffle ? "text-primary" : "text-muted-foreground"} />
@@ -94,7 +96,7 @@ export function MusicPlayer({ songs, index, onIndexChange, playing, onPlayingCha
             <Button
               size="icon"
               aria-label={playing ? "Pause" : "Play"}
-              className="h-11 w-11 rounded-full"
+              className="size-10 rounded-full"
               onClick={() => onPlayingChange(!playing)}
             >
               {playing ? <Pause /> : <Play />}
@@ -106,45 +108,47 @@ export function MusicPlayer({ songs, index, onIndexChange, playing, onPlayingCha
               <Repeat className={loop ? "text-primary" : "text-muted-foreground"} />
             </Button>
           </div>
+
+          <div className="flex w-full items-center gap-3">
+            <span className="w-10 shrink-0 text-right text-[11px] tabular-nums text-muted-foreground">
+              {formatTime(progress)}
+            </span>
+            <Slider
+              value={[progress]}
+              max={duration || 1}
+              step={0.5}
+              aria-label="Seek"
+              onValueChange={([value]) => {
+                const audio = audioRef.current;
+                if (audio && typeof value === "number") {
+                  audio.currentTime = value;
+                  setProgress(value);
+                }
+              }}
+              className="flex-1"
+            />
+            <span className="w-10 shrink-0 text-[11px] tabular-nums text-muted-foreground">
+              {formatTime(duration)}
+            </span>
+          </div>
         </div>
 
-        <div className="flex items-center gap-3">
-          <span className="w-10 shrink-0 text-right text-[11px] tabular-nums text-muted-foreground">
-            {formatTime(progress)}
-          </span>
+        <div className="hidden items-center gap-2 sm:flex sm:w-40">
+          <Button variant="ghost" size="icon" aria-label="Mute" onClick={() => setMuted((v) => !v)}>
+            {muted || volume === 0 ? <VolumeX /> : <Volume2 />}
+          </Button>
           <Slider
-            value={[progress]}
-            max={duration || 1}
-            step={0.5}
-            aria-label="Seek"
+            value={[muted ? 0 : volume * 100]}
+            max={100}
+            step={1}
+            aria-label="Volume"
+            className="w-24"
             onValueChange={([value]) => {
-              const audio = audioRef.current;
-              if (audio && typeof value === "number") {
-                audio.currentTime = value;
-                setProgress(value);
-              }
+              if (typeof value !== "number") return;
+              setMuted(false);
+              setVolume(value / 100);
             }}
-            className="flex-1"
           />
-          <span className="w-10 shrink-0 text-[11px] tabular-nums text-muted-foreground">{formatTime(duration)}</span>
-
-          <div className="hidden items-center gap-2 sm:flex">
-            <Button variant="ghost" size="icon" aria-label="Mute" onClick={() => setMuted((v) => !v)}>
-              {muted || volume === 0 ? <VolumeX /> : <Volume2 />}
-            </Button>
-            <Slider
-              value={[muted ? 0 : volume * 100]}
-              max={100}
-              step={1}
-              aria-label="Volume"
-              className="w-24"
-              onValueChange={([value]) => {
-                if (typeof value !== "number") return;
-                setMuted(false);
-                setVolume(value / 100);
-              }}
-            />
-          </div>
         </div>
       </div>
 
