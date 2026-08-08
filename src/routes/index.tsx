@@ -9,7 +9,7 @@ import { fetchSongs, type Song } from "@/lib/vault";
 import deco1 from "@/assets/deco1.png.asset.json";
 import deco2 from "@/assets/deco2.png.asset.json";
 import deco3 from "@/assets/deco3.png.asset.json";
-import deco4 from "@/assets/deco4.png.asset.json";
+import deco3 from "@/assets/deco3.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
