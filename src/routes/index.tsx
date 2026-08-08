@@ -6,6 +6,10 @@ import { MusicPlayer } from "@/components/MusicPlayer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { fetchSongs, type Song } from "@/lib/vault";
+import deco1 from "@/assets/deco1.png.asset.json";
+import deco2 from "@/assets/deco2.png.asset.json";
+import deco3 from "@/assets/deco3.png.asset.json";
+import deco4 from "@/assets/deco4.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -60,7 +64,31 @@ function Vault() {
   };
 
   return (
-    <div className="min-h-screen pb-28">
+    <div className="relative min-h-screen overflow-hidden pb-28">
+      <img
+        src={deco1.url}
+        alt=""
+        loading="lazy"
+        className="pointer-events-none absolute right-6 top-6 z-10 w-16 animate-float opacity-80 sm:w-24"
+      />
+      <img
+        src={deco2.url}
+        alt=""
+        loading="lazy"
+        className="pointer-events-none absolute right-1/3 top-[38%] z-10 w-14 animate-float opacity-70 sm:w-20"
+      />
+      <img
+        src={deco3.url}
+        alt=""
+        loading="lazy"
+        className="pointer-events-none absolute bottom-40 right-8 z-10 w-16 animate-float opacity-70 sm:w-24"
+      />
+      <img
+        src={deco4.url}
+        alt=""
+        loading="lazy"
+        className="pointer-events-none absolute left-1/2 top-[64%] z-10 w-14 animate-float opacity-70 sm:w-20"
+      />
       <div className="flex min-h-screen">
         <aside className="hidden w-60 shrink-0 flex-col gap-1 border-r border-sidebar-border bg-sidebar p-4 md:flex">
           <div className="mb-6 flex items-center gap-2 px-2">
@@ -97,7 +125,7 @@ function Vault() {
               style={{ backgroundImage: "var(--gradient-dreamy)", backgroundColor: "var(--color-card)" }}
             >
               <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary">
-                permanent public music vault
+                all femboys allowed
               </p>
               <h1 className="mt-3 font-display text-4xl font-extrabold leading-tight sm:text-5xl">
                 because spotify keeps deleting me
@@ -106,6 +134,11 @@ function Vault() {
                 also because the doxxing, some of you are weird. every song lives here — press play, no account
                 needed.
               </p>
+              <div className="mt-5 flex items-center gap-2">
+                {[deco1, deco4, deco3, deco2].map((img, i) => (
+                  <img key={i} src={img.url} alt="" loading="lazy" className="size-8 rounded-md object-cover" />
+                ))}
+              </div>
               <div className="mt-6 flex flex-wrap gap-2">
                 <Button
                   onClick={() => {
