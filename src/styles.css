@@ -141,6 +141,11 @@
   --sidebar-ring: oklch(0.551 0.027 264.364);
 }
 
+@theme inline {
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+}
+
 @layer base {
   * {
     border-color: var(--color-border);
@@ -148,6 +153,35 @@
 
   body {
     background-color: var(--color-background);
+    background-image: var(--gradient-dreamy);
+    background-attachment: fixed;
     color: var(--color-foreground);
+    font-family: var(--font-body);
   }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+  }
+}
+
+@utility card-cute {
+  background-color: var(--color-card);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-soft);
+}
+
+@utility text-gradient-candy {
+  background-image: var(--gradient-candy);
+  background-clip: text;
+  color: transparent;
+}
+
+@keyframes float-cute {
+  0%, 100% { transform: translateY(0) rotate(-3deg); }
+  50% { transform: translateY(-10px) rotate(3deg); }
+}
+
+@utility animate-float {
+  animation: float-cute 6s ease-in-out infinite;
 }
