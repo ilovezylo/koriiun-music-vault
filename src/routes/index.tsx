@@ -128,11 +128,6 @@ function Vault() {
                 also because the doxxing, some of you are weird. every song lives here — press play, no account
                 needed.
               </p>
-              <div className="mt-5 flex items-center gap-2">
-                {[deco1, deco4, deco3, deco2].map((img, i) => (
-                  <img key={i} src={img.url} alt="" loading="lazy" className="size-8 rounded-md object-cover" />
-                ))}
-              </div>
               <div className="mt-6 flex flex-wrap gap-2">
                 <Button
                   onClick={() => {
