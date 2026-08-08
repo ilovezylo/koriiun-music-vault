@@ -75,19 +75,13 @@ function Vault() {
         src={deco2.url}
         alt=""
         loading="lazy"
-        className="pointer-events-none absolute right-1/3 top-[38%] z-10 w-14 animate-float opacity-70 sm:w-20"
+        className="pointer-events-none absolute bottom-40 left-8 z-10 w-14 animate-float opacity-70 sm:w-20"
       />
       <img
         src={deco3.url}
         alt=""
         loading="lazy"
         className="pointer-events-none absolute bottom-40 right-8 z-10 w-16 animate-float opacity-70 sm:w-24"
-      />
-      <img
-        src={deco4.url}
-        alt=""
-        loading="lazy"
-        className="pointer-events-none absolute left-1/2 top-[64%] z-10 w-14 animate-float opacity-70 sm:w-20"
       />
       <div className="flex min-h-screen">
         <aside className="hidden w-60 shrink-0 flex-col gap-1 border-r border-sidebar-border bg-sidebar p-4 md:flex">
